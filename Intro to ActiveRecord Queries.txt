@@ -18,3 +18,9 @@ irb(main):010:0> MediaType.where(name: "Protected MPEG-4 video file")
 irb(main):012:0> Track.where(media_type_id: 3).count
    (36.5ms)  SELECT COUNT(*) FROM "tracks" WHERE "tracks"."media_type_id" = $1  [["media_type_id", 3]]
 => 214
+
+3. Find the genre with the name "Hip Hop/Rap".
+
+irb(main):013:0> Genre.where("name = ?", "Hip Hop/Rap")
+  Genre Load (40.2ms)  SELECT  "genres".* FROM "genres" WHERE (name = 'Hip Hop/Rap') LIMIT $1  [["LIMIT", 11]]
+=> #<ActiveRecord::Relation [#<Genre id: 17, name: "Hip Hop/Rap", created_at: "2013-01-20 02:04:31", updated_at: "2014-01-29 22:14:08">]>
