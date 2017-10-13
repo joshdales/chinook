@@ -30,3 +30,9 @@ irb(main):013:0> Genre.where("name = ?", "Hip Hop/Rap")
 irb(main):016:0> Track.where(genre_id: 17).count
    (3.4ms)  SELECT COUNT(*) FROM "tracks" WHERE "tracks"."genre_id" = $1  [["genre_id", 17]]
 => 35
+
+5. Find the total amount of time required to listen to all the tracks in the database.
+
+irb(main):018:0> Track.all.sum("milliseconds")
+ (87.2ms)  SELECT SUM("tracks"."milliseconds") FROM "tracks"
+=> 1378575827
