@@ -19,13 +19,13 @@ irb(main):012:0> Track.where(media_type_id: 3).count
    (36.5ms)  SELECT COUNT(*) FROM "tracks" WHERE "tracks"."media_type_id" = $1  [["media_type_id", 3]]
 => 214
 
-3. Find the genre with the name "Hip Hop/Rap".
+3.  Find the genre with the name "Hip Hop/Rap".
 
 irb(main):013:0> Genre.where("name = ?", "Hip Hop/Rap")
   Genre Load (40.2ms)  SELECT  "genres".* FROM "genres" WHERE (name = 'Hip Hop/Rap') LIMIT $1  [["LIMIT", 11]]
 => #<ActiveRecord::Relation [#<Genre id: 17, name: "Hip Hop/Rap", created_at: "2013-01-20 02:04:31", updated_at: "2014-01-29 22:14:08">]>
 
-4. Count how many tracks belong to the "Hip Hop/Rap" genre
+4.  Count how many tracks belong to the "Hip Hop/Rap" genre
 
 irb(main):016:0> Track.where(genre_id: 17).count
    (3.4ms)  SELECT COUNT(*) FROM "tracks" WHERE "tracks"."genre_id" = $1  [["genre_id", 17]]
@@ -36,3 +36,14 @@ irb(main):016:0> Track.where(genre_id: 17).count
 irb(main):018:0> Track.all.sum("milliseconds")
  (87.2ms)  SELECT SUM("tracks"."milliseconds") FROM "tracks"
 => 1378575827
+
+6.  Find the highest price of any track that has the media type "MPEG audio file".
+
+
+irb(main):021:0> MediaType.where(name: "MPEG audio file")
+  MediaType Load (1.0ms)  SELECT  "media_types".* FROM "media_types" WHERE "media_types"."name" = $1 LIMIT $2  [["name", "MPEG audio file"], ["LIMIT", 11]]
+=> #<ActiveRecord::Relation [#<MediaType id: 1, name: "MPEG audio file", created_at: "2006-11-24 08:21:33", updated_at: "2014-01-29 22:14:22">]>
+
+irb(main):027:0> Track.where(media_type_id: 1).maximum("unit_price")
+   (4.2ms)  SELECT MAX("tracks"."unit_price") FROM "tracks" WHERE "tracks"."media_type_id" = $1  [["media_type_id", 1]]
+=> 0.99e0
