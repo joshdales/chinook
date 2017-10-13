@@ -1,0 +1,36 @@
+1.  Find the albums recorded by the artist Queen.
+
+chinook_development=# SELECT id FROM artists WHERE name = 'Queen';
+ id
+----
+ 51
+(1 row)
+
+chinook_development=# SELECT * FROM albums WHERE artist_id = 51;
+ id  | artist_id |       title       |         created_at         |         updated_at
+-----+-----------+-------------------+----------------------------+----------------------------
+  36 |        51 | Greatest Hits II  | 2008-01-30 14:00:12.455894 | 2014-01-29 22:14:02.456155
+ 185 |        51 | Greatest Hits I   | 2007-12-29 12:02:13.672295 | 2014-01-29 22:14:02.672569
+ 186 |        51 | News Of The World | 2010-06-23 20:50:06.971442 | 2014-01-29 22:14:02.971684
+(3 rows)
+
+2.  Count how many tracks belong to the media type "Protected MPEG-4 video file".
+
+chinook_development=# SELECT id FROM media_types WHERE name = 'Protected MPEG-4 video file';
+ id
+----
+  3
+(1 row)
+
+chinook_development=# SELECT COUNT(*) FROM tracks WHERE media_type_id = 3;
+ count
+-------
+   214
+(1 row)
+
+
+3.  Find the least expensive track that has the genre "Electronica/Dance".
+
+4.  Find the all the artists whose names start with A.
+
+5.  Find all the tracks that belong to playlist 1.
