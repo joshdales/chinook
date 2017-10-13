@@ -57,3 +57,9 @@ irb(main):046:0> Track.where(media_type_id: 1).order("unit_price").last
 irb(main):047:0> Track.where(media_type_id: 1).order("unit_price").last.name
   Track Load (5.9ms)  SELECT  "tracks".* FROM "tracks" WHERE "tracks"."media_type_id" = $1 ORDER BY unit_price DESC LIMIT $2  [["media_type_id", 1], ["LIMIT", 1]]
 => "Put The Finger On You"
+
+8. Find the 2 oldest artists.
+
+irb(main):058:0> Track.order(:created_at).last(2)
+  Track Load (2.5ms)  SELECT  "tracks".* FROM "tracks" ORDER BY "tracks"."created_at" DESC LIMIT $1  [["LIMIT", 2]]
+=> [#<Track id: 324, album_id: 29, genre_id: 9, media_type_id: 1, name: "Pererê", composer: "Augusto Conceição/Chiclete Com Banana", milliseconds: 198661, bytes: 6643207, unit_price: 0.99e0, created_at: "2014-01-28 17:21:54", updated_at: "2014-01-29 22:14:56">, #<Track id: 325, album_id: 29, genre_id: 9, media_type_id: 1, name: "TriboTchan", composer: "Cal Adan/Paulo Levi", milliseconds: 194194, bytes: 6507950, unit_price: 0.99e0, created_at: "2014-01-28 17:21:54", updated_at: "2014-01-29 22:14:56">]
