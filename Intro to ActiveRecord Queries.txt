@@ -8,3 +8,13 @@ irb(main):004:0> Albums.where(artist_name: "Queen")
 irb(main):006:0> Album.where(artist_id: 51)
   Album Load (1.7ms)  SELECT  "albums".* FROM "albums" WHERE "albums"."artist_id" = $1 LIMIT $2  [["artist_id", 51], ["LIMIT", 11]]
 => #<ActiveRecord::Relation [#<Album id: 36, artist_id: 51, title: "Greatest Hits II", created_at: "2008-01-30 14:00:12", updated_at: "2014-01-29 22:14:02">, #<Album id: 185, artist_id: 51, title: "Greatest Hits I", created_at: "2007-12-29 12:02:13", updated_at: "2014-01-29 22:14:02">, #<Album id: 186, artist_id: 51, title: "News Of The World", created_at: "2010-06-23 20:50:06", updated_at: "2014-01-29 22:14:02">]>
+
+2.  Count how many tracks belong to the media type "Protected MPEG-4 video file".
+
+irb(main):010:0> MediaType.where(name: "Protected MPEG-4 video file")
+  MediaType Load (1.4ms)  SELECT  "media_types".* FROM "media_types" WHERE "media_types"."name" = $1 LIMIT $2  [["name", "Protected MPEG-4 video file"], ["LIMIT", 11]]
+=> #<ActiveRecord::Relation [#<MediaType id: 3, name: "Protected MPEG-4 video file", created_at: "2007-12-07 13:17:17", updated_at: "2014-01-29 22:14:22">]>
+
+irb(main):012:0> Track.where(media_type_id: 3).count
+   (36.5ms)  SELECT COUNT(*) FROM "tracks" WHERE "tracks"."media_type_id" = $1  [["media_type_id", 3]]
+=> 214
